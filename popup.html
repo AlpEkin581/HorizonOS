@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>HorizonOS Terminal</title>
+  <style>
+    /* Tüm tarayıcı boşluklarını sıfırlıyoruz */
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
+    
+    /* Sayfayı tam ekrana zorlayıp taşmaları engelliyoruz */
+    html, body { 
+      width: 100% !important; 
+      height: 100vh !important; 
+      overflow: hidden; 
+      background: #0d1117; 
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    /* 🚀 Terminal elemanlarının dikeyde esnek (flex) sıralanmasını sağlıyoruz */
+    #root, #root > div, .terminal, .terminal-container, .app-container {
+      width: 100% !important;
+      max-width: 100% !important;
+      height: 100vh !important;
+      max-height: 100vh !important;
+      display: flex !important;
+      flex-direction: column !important; /* Elemanları yukarıdan aşağıya dizer */
+      box-sizing: border-box !important;
+    }
+
+    /* 💡 Üst taraftaki şık komut bilgilendirme banner'ı */
+    .terminal-welcome-banner {
+      width: 100%;
+      background: rgba(0, 188, 212, 0.1); /* Hafif saydam mavi */
+      border-left: 4px solid #00bcd4; /* Sol siberpunk şerit */
+      color: #00bcd4;
+      padding: 10px 15px;
+      font-size: 14px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 10px rgba(0, 188, 212, 0.1);
+      flex-shrink: 0; /* Banner'ın boyutunun sıkışmasını engeller */
+    }
+
+    /* 📜 Logların ve çıktıların aktığı orta alan (Kalan tüm boşluğu bu doldurur) */
+    .output-area, #output, .terminal-content {
+      width: 100% !important;
+      flex: 1 !important; /* Dikeyde kalan tüm alanı kaplar */
+      overflow-y: auto !important; /* İçerik uzadıkça pürüzsüz kaydırma sağlar */
+    }
+
+    /* 🛠️ Bug'ı Çözen Yeni Alt Bar CSS Yapısı */
+    /* Artık absolute değil; sayfa akışını bozmadan her zaman en altta kalır */
+    .status-bar, .bottom-bar, footer {
+      width: 100% !important;
+      max-width: 100% !important;
+      background: #0d1117 !important; /* Arkasına yazıların taşmasını engeller */
+      margin-top: auto !important; /* Üstteki alan ne kadar uzarsa uzasın bunu en alta iter */
+      padding: 8px 12px !important;
+      box-sizing: border-box !important;
+      flex-shrink: 0; /* Alt barın dikeyde ezilmesini engeller */
+    }
+
+    /* Özel siberpunk kaydırma çubuğu tasarımların */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-thumb { background: rgba(0,188,212,0.35); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+  <div class="terminal-welcome-banner">
+    [BİLGİ] Komutları öğrenmek için lütfen terminale <strong style="text-decoration: underline;">help</strong> yazın.
+  </div>
+
+  <div id="root"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
