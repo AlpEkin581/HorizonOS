@@ -11,23 +11,22 @@
       padding: 0; 
     }
     
-    /* Sayfayı tam ekrana zorlayıp taşmaları engelliyoruz */
+    /* 🔒 Sabit genişlik ve güvenli yükseklik vererek görev çubuğunun arkasına kaçmasını engelliyoruz */
     html, body { 
-      width: 100% !important; 
-      height: 100vh !important; 
+      width: 800px !important; 
+      height: 540px !important; 
       overflow: hidden; 
       background: #0d1117; 
       font-family: 'Courier New', Courier, monospace;
     }
 
-    /* 🚀 Terminal elemanlarının dikeyde esnek (flex) sıralanmasını sağlıyoruz */
-    #root, #root > div, .terminal, .terminal-container, .app-container {
+    /* 🚀 Terminal ana kapsayıcısını flex-column yapıyoruz */
+    #root {
       width: 100% !important;
-      max-width: 100% !important;
-      height: 100vh !important;
-      max-height: 100vh !important;
+      height: 100% !important;
       display: flex !important;
       flex-direction: column !important; /* Elemanları yukarıdan aşağıya dizer */
+      padding: 15px;
       box-sizing: border-box !important;
     }
 
@@ -41,24 +40,22 @@
       font-size: 14px;
       margin-bottom: 15px;
       box-shadow: 0 0 10px rgba(0, 188, 212, 0.1);
-      flex-shrink: 0; /* Banner'ın boyutunun sıkışmasını engeller */
+      flex-shrink: 0; /* Sıkışmasını engeller */
     }
 
-    /* 📜 Logların ve çıktıların aktığı orta alan (Kalan tüm boşluğu bu doldurur) */
+    /* 📜 Logların ve çıktıların aktığı orta alan (Kalan tüm dikey boşluğu bu doldurur) */
     .output-area, #output, .terminal-content {
       width: 100% !important;
-      flex: 1 !important; /* Dikeyde kalan tüm alanı kaplar */
-      overflow-y: auto !important; /* İçerik uzadıkça pürüzsüz kaydırma sağlar */
+      flex: 1 !important; 
+      overflow-y: auto !important; /* İçerik uzadıkça kendi içinde pürüzsüz kaydırma sağlar */
     }
 
-    /* 🛠️ Bug'ı Çözen Yeni Alt Bar CSS Yapısı */
-    /* Artık absolute değil; sayfa akışını bozmadan her zaman en altta kalır */
+    /* 🛠️ Alt Bar / Komut Giriş Alanı Yapısı */
     .status-bar, .bottom-bar, footer {
       width: 100% !important;
-      max-width: 100% !important;
-      background: #0d1117 !important; /* Arkasına yazıların taşmasını engeller */
-      margin-top: auto !important; /* Üstteki alan ne kadar uzarsa uzasın bunu en alta iter */
-      padding: 8px 12px !important;
+      background: #0d1117 !important; 
+      margin-top: auto !important; /* Her zaman en altta kalmaya zorlar */
+      padding: 8px 0px !important;
       box-sizing: border-box !important;
       flex-shrink: 0; /* Alt barın dikeyde ezilmesini engeller */
     }
@@ -70,11 +67,11 @@
 </head>
 <body>
 
-  <div class="terminal-welcome-banner">
-    [BİLGİ] Komutları öğrenmek için lütfen terminale <strong style="text-decoration: underline;">help</strong> yazın.
+  <div id="root">
+    <div class="terminal-welcome-banner">
+      [BİLGİ] Komutları öğrenmek için lütfen terminale <strong style="text-decoration: underline;">help</strong> yazın.
+    </div>
   </div>
-
-  <div id="root"></div>
 
   <script src="popup.js"></script>
 </body>
