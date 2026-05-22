@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
@@ -11,13 +12,26 @@
       padding: 0; 
     }
     
-    /* 🔒 Sabit genişlik ve güvenli yükseklik vererek görev çubuğunun arkasına kaçmasını engelliyoruz */
+    /* 🔒 AKILLI BOYUTLANDIRMA:
+       Yeni sekmede (tam ekran) açıldığında tüm monitörü kaplar.
+       Uzantı pop-up'ı olarak açıldığında ise 800x560px sınırlarında kalır ve görev çubuğunun altına kaçmaz.
+    */
     html, body { 
-      width: 800px !important; 
-      height: 540px !important; 
+      width: 100vw !important;
+      height: 100vh !important;
+      max-width: 100%;
+      max-height: 100%;
       overflow: hidden; 
       background: #0d1117; 
       font-family: 'Courier New', Courier, monospace;
+    }
+
+    /* Eğer uzantı pop-up penceresindeyse (window modu), boyutları güvenli sınıra çeker */
+    @media (max-width: 850px) and (max-height: 650px) {
+      html, body {
+        width: 800px !important;
+        height: 560px !important;
+      }
     }
 
     /* 🚀 Terminal ana kapsayıcısını flex-column yapıyoruz */
@@ -68,11 +82,4 @@
 <body>
 
   <div id="root">
-    <div class="terminal-welcome-banner">
-      [BİLGİ] Komutları öğrenmek için lütfen terminale <strong style="text-decoration: underline;">help</strong> yazın.
-    </div>
-  </div>
-
-  <script src="popup.js"></script>
-</body>
-</html>
+    <div
